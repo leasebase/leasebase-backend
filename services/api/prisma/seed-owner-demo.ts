@@ -303,8 +303,8 @@ async function main(): Promise<void> {
 
   const adminUser = await prisma.user.upsert({
     where: { organizationId_email: { organizationId: orgId, email: `admin${DEMO_EMAIL_DOMAIN}` } },
-    update: { name: 'Morgan Blake', cognitoSub: 'demo-ow-admin', role: UserRole.ORG_ADMIN },
-    create: { organizationId: orgId, email: `admin${DEMO_EMAIL_DOMAIN}`, name: 'Morgan Blake', cognitoSub: 'demo-ow-admin', role: UserRole.ORG_ADMIN },
+    update: { name: 'Morgan Blake', cognitoSub: 'demo-ow-admin', role: UserRole.OWNER },
+    create: { organizationId: orgId, email: `admin${DEMO_EMAIL_DOMAIN}`, name: 'Morgan Blake', cognitoSub: 'demo-ow-admin', role: UserRole.OWNER },
   });
 
   // ─── 3. Properties + Units ───
