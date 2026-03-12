@@ -9,12 +9,9 @@ datasource db {
 
 enum OrganizationType {
   LANDLORD
-  PM_COMPANY
 }
 
 enum UserRole {
-  ORG_ADMIN
-  PM_STAFF
   OWNER
   TENANT
 }
