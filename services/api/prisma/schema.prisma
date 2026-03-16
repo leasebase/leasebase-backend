@@ -106,6 +106,7 @@ model User {
   auditLogs          AuditLog[]         @relation("AuditActor")
   documents          Document[]
   managerAssignments ManagerPropertyAssignment[]
+  legalAcceptances   LegalAcceptance[]
 
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
@@ -369,4 +370,22 @@ model Subscription {
 
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
+}
+
+model LegalAcceptance {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+
+  documentSlug    String   // e.g. "terms", "privacy", "owner-agreement"
+  documentVersion String   // e.g. "2026-03-v1"
+  documentHash    String?  // optional content hash for auditability
+  acceptedAt      DateTime @default(now())
+  source          String   // e.g. "owner-signup", "tenant-invite"
+  ipAddress       String?
+  userAgent       String?
+
+  @@unique([userId, documentSlug, documentVersion, source])
+  @@index([userId])
+  @@index([userId, documentSlug])
 }
